@@ -13,4 +13,5 @@ public interface BookService {
     public List<Book> findByNombreOrAutor(String data);
     public List<Book> frinByGenero(String data);
     public List<Book> findByFechas(Date data1, Date data2);
+    public List<Book> findByFecha(Date data);
 }

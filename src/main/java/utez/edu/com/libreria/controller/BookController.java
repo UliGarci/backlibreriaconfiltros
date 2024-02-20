@@ -19,7 +19,7 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @GetMapping(value = "/books")
+    @GetMapping(value = "/")
     public ResponseEntity<Object> get(){
         Map<String,Object> map=new HashMap<String,Object>();
         try{
@@ -44,7 +44,7 @@ public class BookController {
     }
 
     @GetMapping(value = "/bookByFechas/{data1}&{data2}")
-    public ResponseEntity<Object> getByFechas(@PathVariable@DateTimeFormat(pattern = "yyyy-MM-dd") Date data1,@PathVariable@DateTimeFormat(pattern = "yyy-MM-dd") Date data2){
+    public ResponseEntity<Object> getByfechas(@PathVariable@DateTimeFormat(pattern = "yyyy-MM-dd") Date data1,@PathVariable@DateTimeFormat(pattern = "yyy-MM-dd") Date data2){
         Map<String,Object> map = new HashMap<>();
         try {
             List<Book> list = bookService.findByFechas(data1,data2);
@@ -67,7 +67,19 @@ public class BookController {
         }
     }
 
-    @GetMapping(value = "/book/{id}")
+    @GetMapping(value = "/bookByFecha/{data}")
+    public ResponseEntity<Object> getByfecha(@PathVariable@DateTimeFormat(pattern = "yyyy-MM-dd") Date data){
+        Map<String,Object> map = new HashMap<>();
+        try {
+            List<Book> list = bookService.findByFecha(data);
+            return new ResponseEntity<Object>(list,HttpStatus.OK);
+        }catch (Exception e){
+            map.put("message: ",e.getMessage());
+            return new ResponseEntity<>(map, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping(value = "/{id}")
     public ResponseEntity<Object> getById(@PathVariable Long id){
         try{
             Book book  = bookService.findById(id);

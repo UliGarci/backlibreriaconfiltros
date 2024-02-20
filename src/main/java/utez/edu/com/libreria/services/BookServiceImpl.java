@@ -50,4 +50,9 @@ public class BookServiceImpl implements BookService {
     public List<Book> findByFechas(Date data1, Date data2) {
         return bookDao.findBookByFechaBetween(data1,data2);
     }
+
+    @Override
+    public List<Book> findByFecha(Date data) {
+        return bookDao.findBookByFecha(data);
+    }
 }

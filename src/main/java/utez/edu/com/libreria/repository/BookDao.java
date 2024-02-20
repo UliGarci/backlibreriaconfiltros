@@ -21,4 +21,7 @@ public interface BookDao extends JpaRepository<Book,Long>{
     @Query(value = "SELECT b FROM Book b WHERE b.fecha BETWEEN :data1 AND :data2")
     List<Book> findBookByFechaBetween(Date data1, Date data2);
 
+    @Query(value = "SELECT b FROM Book b WHERE b.fecha = :data")
+    List<Book> findBookByFecha(Date data);
+
 }
